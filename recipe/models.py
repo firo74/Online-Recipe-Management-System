@@ -10,8 +10,8 @@ class Recipe(models.Model):
     description = models.TextField()
     instructions = models.TextField()
     preparation_time = models.CharField(max_length=50)
-    cooking_time = models.CharField()
-    difficulty_level = models.CharField(choices=DIFFICULTY_CHOICES)
+    cooking_time = models.CharField(max_length=50)
+    difficulty_level = models.CharField(max_length=50, choices=DIFFICULTY_CHOICES)
     category = models.ManyToManyField('Category', related_name= 'recipe_category')
     ingredients = models.ManyToManyField('Ingredients', related_name= 'recipe_ingredients')
 
@@ -27,7 +27,7 @@ class Category(models.Model):
 
 class Ingredients(models.Model):
     name = models.CharField(max_length=50)
-    quantity = models.CharField()
+    quantity = models.CharField(max_length=50)
 
 
     def __str__(self):

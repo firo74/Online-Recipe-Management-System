@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>{{ recipe.title }}</h1>
+
+<p><strong>Description:</strong> {{ recipe.description }}</p>
+<p><strong>Difficulty:</strong> {{ recipe.difficulty_level }}</p>
+<p><strong>Preparation Time:</strong> {{ recipe.preparation_time }} min</p>
+<p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} min</p>
+
+<h3>Ingredients:</h3>
+<ul>
+  {% for ingredient in recipe.ingredients.all %}
+    <li>{{ ingredient.name }} - {{ ingredient.quantity }}</li>
+  {% empty %}
+    <li>No ingredients</li>
+  {% endfor %}
+</ul>
+
+<h3>Categories:</h3>
+<ul>
+  {% for category in recipe.category.all %}
+    <li>{{ category.name }}</li>
+  {% empty %}
+    <li>No categories</li>
+  {% endfor %}
+</ul>
+
+<h3>Instructions:</h3>
+<p>{{ recipe.instructions }}</p>
+
+<a href="{% url 'recipe_list' %}">Back to list</a>
+
+</body>
+</html>
