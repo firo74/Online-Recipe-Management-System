@@ -56,10 +56,11 @@ def RecipeUpdateView(request, pk):
     recipe = Recipe.objects.get(pk = pk)
     if request.method == 'GET':
         form = RecipeForm(instance=recipe)
-        return render(request, 'recipe_update.html',{'form': form})
+        return render(request, 'recipe_update.html',{'form': form, 'recipe': recipe})
 
     elif request.method == 'POST':
-        form = RecipeForm(request.POST)
+        form = RecipeForm(request.POST, instance=recipe)
         if form.is_valid():
             form.save()
-            return render(request, 'recipe_update.html',{'form': form})
+            return redirect('recipe_list')
+            # return render(request, 'recipe_update.html',{'form': form})

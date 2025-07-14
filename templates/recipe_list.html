@@ -13,8 +13,11 @@
         
 
             <li>
+
                 <a href="{% url 'recipe_details' recipe.pk %}">{{ recipe.title }}</a> 
-                <a href="{% url 'recipe_update'recipe.pk %}">UPDATE</a>         
+                <button><a href="{% url 'recipe_update' recipe.pk %}">UPDATE</a></button>
+
+  
 
             </li>
 
