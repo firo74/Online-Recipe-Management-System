@@ -1,41 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}{{ recipe.title }}{% endblock %}
+{% block content %}
 
-<h1>{{ recipe.title }}</h1>
-
+<h2>{{ recipe.title }}</h2>
 <p><strong>Description:</strong> {{ recipe.description }}</p>
+<p><strong>Preparation Time:</strong> {{ recipe.preparation_time }} mins</p>
+<p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} mins</p>
 <p><strong>Difficulty:</strong> {{ recipe.difficulty_level }}</p>
-<p><strong>Preparation Time:</strong> {{ recipe.preparation_time }} min</p>
-<p><strong>Cooking Time:</strong> {{ recipe.cooking_time }} min</p>
 
-<h3>Ingredients:</h3>
-<ul>
-  {% for ingredient in recipe.ingredients.all %}
-    <li>{{ ingredient.name }} - {{ ingredient.quantity }}</li>
-  {% empty %}
-    <li>No ingredients</li>
-  {% endfor %}
-</ul>
-
-<h3>Categories:</h3>
-<ul>
-  {% for category in recipe.category.all %}
-    <li>{{ category.name }}</li>
-  {% empty %}
-    <li>No categories</li>
-  {% endfor %}
-</ul>
-
-<h3>Instructions:</h3>
+<h4>Instructions:</h4>
 <p>{{ recipe.instructions }}</p>
 
-<a href="{% url 'recipe_list' %}">Back to list</a>
+<h4>Ingredients:</h4>
+<ul>
+    {% for ingredient in recipe.ingredients.all %}
+        <li>{{ ingredient.quantity }} of {{ ingredient.name }}</li>
+    {% endfor %}
+</ul>
 
-</body>
-</html>
+<h5>Categories:</h5>
+<ul>
+    {% for cat in recipe.categories.all %}
+        <li>{{ cat.name }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'recipe_update' recipe.pk %}" class="btn btn-warning">✏️ Edit</a>
+<a href="{% url 'recipe_delete' recipe.pk %}" class="btn btn-danger">🗑️ Delete</a>
+<a href="{% url 'recipe_list' %}" class="btn btn-secondary">⬅️ Back</a>
+
+{% endblock %}

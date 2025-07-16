@@ -1,29 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>List of recipes</h1>
-    <ul>
-        
-        {% for recipe in recipes %}
-        
+{% extends 'base.html' %}
+{% block title %}All Recipes{% endblock %}
+{% block content %}
 
-            <li>
+<a class="btn btn-success mb-3" href="{% url 'recipe_form' %}">➕ Add New Recipe</a>
 
-                <a href="{% url 'recipe_details' recipe.pk %}">{{ recipe.title }}</a> 
-                <button><a href="{% url 'recipe_update' recipe.pk %}">UPDATE</a></button>
+<h3>All Recipes</h3>
+<ul class="list-group">
+    {% for recipe in recipes %}
+        <li class="list-group-item d-flex justify-content-between">
+            <div>
+                <strong>{{ recipe.title }}</strong> - {{ recipe.description|truncatechars:80 }}
+            </div>
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'recipe_details' recipe.pk %}">View</a>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No recipes found.</li>
+    {% endfor %}
+</ul>
 
-  
-
-            </li>
-
-
-
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% endblock %}
