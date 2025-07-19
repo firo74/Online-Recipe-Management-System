@@ -90,3 +90,5 @@ def recently_viewed(request):
     return render(request, 'recently_viewed.html', {'recipes': recipes})
 
 
+
+
